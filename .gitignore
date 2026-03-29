@@ -1,0 +1,27 @@
+# data — never commit
+chexpert_val/
+chexlocalize/
+results/
+figures/
+
+# model weights and checkpoints
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# numpy arrays
+*.npy
+*.npz
+
+# credentials
+*.env
+secrets.json
+
+# colab / jupyter
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
