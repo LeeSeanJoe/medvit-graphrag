@@ -2,7 +2,6 @@
 chexpert_val/
 chexlocalize/
 results/
-figures/
 
 # model weights and checkpoints
 *.pth
