@@ -10,9 +10,11 @@ Uses knowledge graphs and LLMs to improve zero-shot localization of chest X-ray 
 
 ```
 medvit-graphrag/
-├── 01_knowledge_graphs.ipynb   # Build pathology subgraphs (RadGraph schema)
-├── 02_prompt_synthesis.ipynb   # Generate prompts for all 4 conditions via Claude API
-├── 03_localization.ipynb       # Patch-text similarity localisation + evaluation
+├── 01_knowledge_graphs.ipynb      # Build pathology subgraphs (RadGraph schema)
+├── 02_prompt_synthesis.ipynb      # Generate prompts for all 4 conditions via Claude API
+├── 03_localization.ipynb          # GradCAM-based localization + evaluation (BiomedCLIP)
+├── 04_raddino_replication.ipynb   # Cross-backbone replication on RAD-DINO
+├── 05_statistical_analysis.ipynb  # Mann-Whitney U, Spearman correlation, bootstrap CI, paper figures
 └── README.md
 ```
 
@@ -28,6 +30,19 @@ All data and results are saved to Google Drive at `$DRIVE_BASE = /content/drive/
 | B | `expanded` | LLM-expanded without graph — controls for prompt length |
 | C | `graphrag` | Full graph (spatial + non-spatial edges) → LLM |
 | D | `graphrag_spatial` | Spatial edges only → LLM — spatially-weighted GraphRAG |
+
+---
+
+## Key results
+
+| Pathology | D vs A (BiomedCLIP) | D vs A (RAD-DINO) | Significance |
+|-----------|--------------------|--------------------|--------------|
+| Cardiomegaly | +60.5% | +34.7% | ** p<0.01 both backbones |
+| Edema | −34.3% | −13.8% | * p<0.05 BiomedCLIP |
+| Lung Opacity | +3.4% | −1.2% | ns |
+| Pleural Effusion | −2.6% | +9.4% | ns |
+
+Mechanistic validation: Spearman ρ = 0.70–0.89 between alignment ratio improvement and IoU improvement across all pathologies and both backbones (all p < 0.01).
 
 ---
 
@@ -49,7 +64,9 @@ All data and results are saved to Google Drive at `$DRIVE_BASE = /content/drive/
 
 1. Open notebooks in Google Colab (GPU runtime recommended)
 2. Add `ANTHROPIC_API_KEY` to Colab secrets (🔑 icon) — required for notebook 02 only
-3. Run notebooks in order: 01 → 02 → 03
+3. Run notebooks in order: `01 → 02 → 03 → 04 → 05`
+
+Notebooks 04 and 05 depend on results saved by 03. Notebook 05 depends on results from both 03 and 04.
 
 ---
 
@@ -84,18 +101,3 @@ Graphs are sourced from 19 peer-reviewed radiology references:
 **Knowledge Graph Schema**
 - Jain et al. RadGraph NeurIPS 2021: https://openreview.net/forum?id=pMWtc5NKd7V
 - Delbrouck et al. RadGraph-XL ACL 2024: https://physionet.org/content/radgraph-xl/1.0.0/
-
----
-
-## Citation
-
-If you use this work, please cite:
-
-```
-@misc{medvit-graphrag-2026,
-  title  = {GraphRAG-Augmented Zero-Shot Localization in Medical Vision Transformers},
-  author = {Sean},
-  year   = {2026},
-  note   = {MIT AI+X PBL Project}
-}
-```
