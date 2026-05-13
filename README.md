@@ -101,3 +101,13 @@ Graphs are sourced from 19 peer-reviewed radiology references:
 **Knowledge Graph Schema**
 - Jain et al. RadGraph NeurIPS 2021: https://openreview.net/forum?id=pMWtc5NKd7V
 - Delbrouck et al. RadGraph-XL ACL 2024: https://physionet.org/content/radgraph-xl/1.0.0/
+
+---
+
+# CLS-Gradient Projection — Interactive Walkthrough
+
+A seven-stage interactive explainer for the patch-attribution method used in
+medvit-graphrag. Walks through prompt encoding → ViT forward → cosine
+similarity → CLS-gradient backward → projection → mask → IoU.
+
+Live: https://leeseanjoe.github.io/cls-gradient-demo/
