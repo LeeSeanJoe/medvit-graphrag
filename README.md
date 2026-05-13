@@ -110,4 +110,4 @@ A seven-stage interactive explainer for the patch-attribution method used in
 medvit-graphrag. Walks through prompt encoding → ViT forward → cosine
 similarity → CLS-gradient backward → projection → mask → IoU.
 
-Live: https://leeseanjoe.github.io/cls-gradient-demo/
+Live: [https://leeseanjoe.github.io/cls-gradient-demo/](https://leeseanjoe.github.io/medvit-graphrag/)
